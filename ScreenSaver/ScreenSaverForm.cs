@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace ScreenSaver
 {
-    public partial class Form1 : Form
+    public partial class ScreenSaverForm : Form
     {
-        public Form1()
+        public ScreenSaverForm(Rectangle Bounds)
         {
             InitializeComponent();
+            this.Bounds = Bounds;
+        }
+
+        private void ScreenSaverForm_Load(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            TopMost = true;
         }
     }
 }
