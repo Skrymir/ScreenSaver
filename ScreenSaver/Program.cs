@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScreenSaver
@@ -20,24 +17,33 @@ namespace ScreenSaver
             // > 0 means we have some args
             if(args.Length > 0)
             {
-                string firstArg = args[0].ToLower().Trim();
-                string secondArg = null;
+                string arg = args[0].ToLower().Trim().Substring(0, 2);
 
-                if(firstArg.Length > 2)
+                if(arg.Equals("/s"))
                 {
-                    secondArg = firstArg.Substring(3).Trim();
-                    firstArg = firstArg.Substring(0, 2);
-                }
-                else if(args.Length > 1)
-                {
-                    secondArg = args[1];
-                }
-
-                if (firstArg.Equals("/s"))
-                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
                     ShowScreenSaver();
                     Application.Run();
                 }
+                else if (arg.Equals("/p"))
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    ShowScreenSaver();
+                    Application.Run(new ScreenSaverForm(new IntPtr(long.Parse(args[1]))));
+                }
+                else if (arg.Equals("/c"))
+                {
+                    MessageBox.Show("There are no settings to configure!", "So Much Blank",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            } else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                ShowScreenSaver();
+                Application.Run();
             }
         }
 
